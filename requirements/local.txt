@@ -1,0 +1,14 @@
+-r ./base.txt
+-r ./linters.txt
+-r ./testing.txt
+-r ./coverage.txt
+
+Werkzeug==0.15.4  # https://github.com/pallets/werkzeug
+
+# Debug
+# ------------------------------------------------------------------------------
+ipdb==0.12  # https://github.com/gotcha/ipdb
+
+# Django
+# ------------------------------------------------------------------------------
+django-debug-toolbar==1.11  # https://github.com/jazzband/django-debug-toolbar

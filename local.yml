@@ -1,0 +1,97 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:10.8-alpine
+    networks:
+      - db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - docker/db/.env
+
+  redis:
+    image: redis
+    networks:
+      - redis
+    volumes:
+      - redis:/data
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile_local
+    networks:
+      - backend
+      - redis
+      - db
+    volumes:
+      - ./:/app
+    command: |
+      /usr/bin/env sh -c "wait-for db:5432 --
+        python manage.py collectstatic --noinput
+        python manage.py migrate
+        python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - docker/app/.env
+      - docker/db/.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - redis
+  celery:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile_local
+    networks:
+      - db
+      - redis
+      - backend
+    volumes:
+      - ./:/app
+    command: |
+      /usr/bin/env sh -c "wait-for db:5432 --
+        celery -A page_analyzer.apps.taskapp worker -l INFO"
+    env_file:
+      - docker/app/.env
+      - docker/db/.env
+    depends_on:
+      - db
+      - redis
+
+  celery_beat:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile_local
+    networks:
+      - db
+      - redis
+      - backend
+    volumes:
+      - ./:/app
+    command: |
+      /usr/bin/env sh -c "wait-for db:5432 --
+        celery -A page_analyzer.apps.taskapp beat -l INFO --pidfile=/tmp/celerybeat.pid"
+    env_file:
+      - docker/app/.env
+      - docker/db/.env
+    depends_on:
+      - db
+      - redis
+
+networks:
+  db:
+    driver: bridge
+  backend:
+    driver: bridge
+  redis:
+    driver: bridge
+
+volumes:
+    redis:
+      name: page_analyzer_redis
+      driver: local
+    pgdata:
+      name: page_analyzer_db
+      driver: local

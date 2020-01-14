@@ -1,0 +1,110 @@
+stages:
+  - linters
+  - tests
+  - coverage
+  - pages
+
+variables:
+  DJANGO_SECRET_KEY: "special_secret_key_for_ci"
+  POSTGRES_HOST: "postgres"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: page_analyzer
+  POSTGRES_USER: page_analyzer
+  POSTGRES_PASSWORD: page_analyzer
+
+flake8:
+  stage: linters
+  image: python:3.7
+  before_script:
+    - pip install --exists-action=s -r requirements/linters.txt
+  script:
+    - flake8 --statistics --show-source | tee flake8.txt
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    expire_in: 1 day
+    paths:
+      - flake8.txt
+  when: always
+  only:
+    - merge_requests
+  tags:
+    - django_tests
+
+pylint:
+  stage: linters
+  image: python:3.7
+  before_script:
+    - pip install --exists-action=s -r requirements/base.txt -r requirements/linters.txt
+  script:
+    - pylint --rcfile=./setup.cfg page_analyzer | tee pylint.txt
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    expire_in: 1 day
+    paths:
+      - pylint.txt
+  when: always
+  only:
+    - merge_requests
+  tags:
+    - django_tests
+
+tests:
+  image: python:3.7
+  before_script:
+    - apt update && apt install -y cowsay
+    - pip install --exists-action=s -r requirements/base.txt -r requirements/testing.txt
+  services:
+    - postgres:10.8-alpine
+  stage: tests
+  script:
+    - if ! pytest -v --cov --cov-report term-missing --create-db ;
+                  then /usr/games/cowsay -f eyes "!!!!!!!! YOUR TESTS FAILED !!!!!!!!";
+                  exit 1; fi
+  only:
+    - merge_requests
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    expire_in: 1 day
+    paths:
+      - .coverage
+  tags:
+    - django_tests
+
+coverage:
+  image: python:3.7
+  before_script:
+    - apt update && apt install -y cowsay
+    - pip install --exists-action=s -r requirements/coverage.txt
+  stage: coverage
+  script:
+    - apt update && apt install -y cowsay
+    - coverage report
+    - if ! coverage report --fail-under=85;
+           then /usr/games/cowsay -f ghostbusters "YOUR CODE COVERAGE LESS THAN 85% !!!";
+           exit 1; fi
+    - coverage html
+  only:
+    - merge_requests
+  when: on_success
+  artifacts:
+    name: "$CI_COMMIT_REF_SLUG"
+    expire_in: 1 day
+    paths:
+      - htmlcov
+  tags:
+    - django_tests
+
+pages:
+  stage: pages
+  dependencies:
+    - coverage
+  script:
+    - mv htmlcov/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 1 days
+  only:
+    - merge_requests
+  tags:
+    - django_tests

@@ -1,0 +1,107 @@
+[
+  {
+    "model": "flatpages.SupportCenterCategory",
+    "pk": 1,
+    "fields": {
+      "title": "Pages",
+      "slug": "pages"
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterCategory",
+    "pk": 2,
+    "fields": {
+      "title": "Servers",
+      "slug": "servers"
+
+    }
+  },
+   {
+    "model": "flatpages.SupportCenterCategory",
+    "pk": 3,
+    "fields": {
+      "title": "Registration",
+      "slug": "registration"
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterCategory",
+    "pk": 4,
+    "fields": {
+      "title": "How to use",
+      "slug": "how-to-use"
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 1,
+    "fields": {
+      "category": 2,
+      "question": "<h2>What is Lorem Ipsum?</h2>",
+      "answer": "<strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.",
+      "status": "published",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 1
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 2,
+    "fields": {
+      "category": 4,
+      "question": "<p><em>simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text </em>ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book?</p>",
+      "answer": "<p>There are many var<u>iations of pass</u>ages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look <strong>even</strong> slightly believable. If you are going to use a passage of Lorem Ipsu</p>",
+      "status": "published",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 1
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "question": "Curabitur tincidunt augue odio, in varius leo viverra sed. Donec vel fermentum dui. Pellentesque sed vulputate ipsum. Proin eget eros sapien?",
+      "answer": "Nulla ultricies diam urna, sed ultricies enim malesuada ut. Pellentesque ut fermentum purus, ut lacinia nisi. Pellentesque faucibus lacus metus, in eleifend sem laoreet non. Phasellus sed ante ut lorem porttitor hendrerit. Praesent lobortis mollis lorem, eget mattis justo convallis a",
+      "status": "published",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 1
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 4,
+    "fields": {
+      "category": 2,
+      "question": "Nulla ultricies diam urna, sed ultricies enim malesuada ut. Pellentesque ut fermentum purus, ut lacinia nisi. Pellentesque faucibus lacus metus, in eleifend sem laoreet non. Phasellus sed ante ut lorem porttitor hendrerit. Praesent lobortis mollis lorem, <em>eget mattis</em> justo convallis a?",
+      "answer": "Suspendisse purus risus, rutrum sit amet pharetra vitae, sollicitudin eleifend ipsum. Donec hendrerit erat id nunc laoreet",
+      "status": "published",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 2
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 5,
+    "fields": {
+      "category": 3,
+      "question": "Donec blandit rutrum odio?",
+      "answer": "Quisque consectetur dignissim velit, et cursus orci rhoncus ac. Integer odio odio, elementum in tortor non, pellentesque semper tortor",
+      "status": "published",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 1
+    }
+  },
+  {
+    "model": "flatpages.SupportCenterElement",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "question": "Nam diam est, condimentum id fringilla et, placerat id tortor?",
+      "answer": "Nam diam est, condimentum id fringilla et, placerat id tortor!",
+      "status": "hidden",
+      "status_changed": "2018-06-26T11:28:57.197Z",
+      "order": 3
+    }
+  }
+]

@@ -1,0 +1,18 @@
+# Pre-Commit hooks
+# See: https://pre-commit.com/hooks.html
+default_language_version:
+    python: python3.7
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.2.3
+  hooks:
+    - id: check-merge-conflict
+    - id: debug-statements
+    - id: check-ast
+    - id: check-docstring-first
+    - id: detect-private-key
+    - id: name-tests-test
+      args: ['--django']
+      exclude: factories.py
+    - id: no-commit-to-branch
+      args: [--branch, develop, --branch, staging, --branch, master]

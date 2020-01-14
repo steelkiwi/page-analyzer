@@ -1,0 +1,8 @@
+{% load i18n %}{% autoescape off %}
+    {% blocktrans %} There is contact us request from email: {{ email }} {% endblocktrans %}
+    <p>{% trans "Request message:" %}</p>
+    <p>
+        {% blocktrans %}  {{ description }} {% endblocktrans %}
+    </p>
+{% endautoescape %}
+}

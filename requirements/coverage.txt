@@ -1,0 +1,3 @@
+# Code quality
+# ------------------------------------------------------------------------------
+coverage==5.0.2  # https://github.com/nedbat/coveragepy
