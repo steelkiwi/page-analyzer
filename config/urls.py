@@ -15,6 +15,8 @@ urlpatterns = [
         # Your stuff: custom urls includes go here
     ], 'api'), namespace='api')),
 
+    path('', include('analyzer.urls'))
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
