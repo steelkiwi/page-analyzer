@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Analysis detail</title>
+</head>
+<body>
+
+
+<h2>Analysis # {{analysis.pk}}</h2>
+<ul>
+  <li><span>Url : {{analysis.url}}</span></li>
+  <li><span>Page title: {{analysis.page_title}}</span></li>
+  <li><span>Response code : {{analysis.response_code}}</span></li>
+  <li><span>Description : {{analysis.error_description}}</span></li>
+  <li><span>Http version : {{analysis.http_version}}</span></li>
+  <li><span>Has login form : {{analysis.is_login}}</span></li>
+</ul>
+
+
+<h4>Headings:</h4>
+<ul>
+  {% for heading in analysis.headings.all %}
+  <li>{{heading.tag}} : {{heading.count}}</li>
+  {% endfor %}
+</ul>
+<h4>Links:</h4>
+<ul>
+  {% for link in analysis.links.all %}
+  <li>{{link.type|title}}:</li>
+  <ul>
+    <li>total:{{link.count}}</li>
+    <li>inaccessible: {{link.inaccessible_count}}</li>
+  </ul>
+  {% endfor %}
+</ul>
+
+
+</body>
+</html>
