@@ -1,5 +1,5 @@
-from django.urls import path, include
-from .views import AnalysisTriggerView,AnalysisDetailView
+from django.urls import path
+from .views import AnalysisTriggerView, AnalysisDetailView
 
 urlpatterns = [
     path("", AnalysisTriggerView.as_view(), name='analysis-trigger'),

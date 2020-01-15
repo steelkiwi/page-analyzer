@@ -1,6 +1,5 @@
-import requests
-import re
 from urllib.request import urlparse, urljoin
+import requests
 
 
 def is_valid_url(url):

@@ -6,9 +6,6 @@ import requests
 from .utils import get_links, links_count_inaccessible
 
 
-# Create your models here.
-
-
 class Analysis(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     url = models.URLField()
