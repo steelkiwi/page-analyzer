@@ -136,7 +136,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'users.apps.UsersAppConfig',
     'flatpages.apps.FlatpagesConfig',
-    'files.apps.FilesConfig'
+    'files.apps.FilesConfig',
+    'analyzer.apps.AnalyzerConfig'
 )
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -254,6 +255,21 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+# Django Cache
+# https://docs.djangoproject.com/en/3.0/topics/cache/
+# ------------------------------------------------------------------------------
+# Analysis TTL cache constance in seconds
+ANALYSIS_CACHE_TTL = 60*60*24
+ANALYSIS_CACHE = 'default'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'analysis_cache_table',
+        'TIMEOUT': ANALYSIS_CACHE_TTL,
+
+    }
+}
 
 # Django Media Files
 # https://docs.djangoproject.com/en/2.2/ref/settings/#media-root
