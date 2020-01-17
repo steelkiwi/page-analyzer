@@ -8,7 +8,6 @@ from .serializers import AnalysisTriggerSerializer, AnalysisSerializer
 from .models import Analysis
 
 
-
 class AnalysisTriggerView(GenericAPIView):
     serializer_class = AnalysisTriggerSerializer
     permission_classes = (AllowAny,)

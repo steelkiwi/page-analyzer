@@ -5,7 +5,6 @@ import requests
 from model_utils import Choices
 
 
-
 class Analysis(models.Model):
     #  Waiting timeout for server response in seconds
     REQUEST_TIMEOUT = 5
@@ -63,7 +62,7 @@ class Analysis(models.Model):
         login_related_inputs = soup.findAll('input', {'type': self.INPUT_TYPES, 'name': self.INPUT_NAMES})
         self.is_login = bool(login_related_inputs)
 
-    def is_valid_url(self, url): # pylint: disable=no-self-use
+    def is_valid_url(self, url):  # pylint: disable=no-self-use
         parsed = urlparse(url)
         return bool(parsed.netloc) and bool(parsed.scheme)
 
