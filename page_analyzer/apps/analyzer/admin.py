@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Analysis, Heading, Link
+from .models import Analysis, Tag, Link
 
 
 # Register your models here.
 
 
 class HeadingsInline(admin.TabularInline):
-    model = Heading
+    model = Tag
 
 
 class LinksInline(admin.TabularInline):

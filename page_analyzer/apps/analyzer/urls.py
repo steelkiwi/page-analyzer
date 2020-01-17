@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import AnalysisTriggerView, AnalysisDetailView
+from .views import AnalysisTriggerView
 
 urlpatterns = [
-    path("", AnalysisTriggerView.as_view(), name='analysis-trigger'),
-    path('analysis/<int:pk>/', AnalysisDetailView.as_view(), name='analysis-detail')
+    path("analyze-url/", AnalysisTriggerView.as_view(), name='analyze-url'),
+
 ]
